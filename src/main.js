@@ -1,7 +1,14 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-
+import './plugins/element.js'
+import './assets/css/global.css'
+import axios from 'axios'
+import qs from 'qs'
+Vue.prototype.$http = axios
+Vue.prototype.$qs = qs
+// 配置请求根路径
+axios.defaults.baseURL = 'http://127.0.0.1:8888'
 Vue.config.productionTip = false
 
 new Vue({
