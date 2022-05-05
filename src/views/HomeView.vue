@@ -21,13 +21,13 @@ export default {
   data () {
     return {
       loginData: {
-        username: 'admin',
+        username: 'wsc',
         password: '111111'
       },
       loginRules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { min: 2, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
@@ -40,10 +40,15 @@ export default {
     loginBtn () {
       this.$refs.loginForm.validate(async valid => {
         if (!valid) return this.$message.error('请填写正确的用户信息！')
-        const { data: res } = await this.$http.post('/api/login', this.loginData)
-        console.log(res)
+        // const { data: res } = await this.$http.post('/api/login', this.loginData)
+        const { data: res } = await this.$http({
+          url: '/api/login',
+          method: 'post',
+          data: this.$qs.stringify(this.loginData),
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
         if (res.status !== 0) {
-          return this.$message.error('登陆失败！')
+          return this.$message.error(res.message)
         }
         this.$message.success(res.message)
         window.sessionStorage.setItem('token', res.token)

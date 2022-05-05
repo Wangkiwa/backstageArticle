@@ -68,7 +68,7 @@ export default {
         })
         console.log(res)
         if (res.status !== 0) {
-          return this.$message.error('注册失败！')
+          return this.$message.error(res.message)
         }
         // 注册成功
         this.$message.success('注册成功！')
