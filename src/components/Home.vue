@@ -4,17 +4,15 @@
       <h1>个人博客系统</h1>
 
       <div class="userInfo header-userInfo">
-        <a href="javascript:;">
-          <img v-if="dataList.user_pic" :src="this.dataList.user_pic" alt="">
-          <img v-else src="../../src/assets/logo.png" alt="">
-        </a>
-        <span>欢迎您&nbsp;{{this.dataList.username}}</span>
-        <el-dropdown size="mini" split-button type="info" plain>
-          个人中心
+        <el-dropdown size="medium" type="info" plain>
+
+          <el-button class="sele-center">
+            <i class="el-icon-user"></i>个人中心<i class="el-icon-arrow-down el-icon--right"></i>
+          </el-button>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>修改资料</el-dropdown-item>
-            <el-dropdown-item>更换头像</el-dropdown-item>
-            <el-dropdown-item>重置密码</el-dropdown-item>
+            <el-dropdown-item @click.native="userinfoDropBtn">修改资料</el-dropdown-item>
+            <el-dropdown-item @click.native="updateAvatarDropBtn">更换头像</el-dropdown-item>
+            <el-dropdown-item @click.native="regPwdDropBtn">重置密码</el-dropdown-item>
             <el-dropdown-item @click.native="exitBtn">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -107,6 +105,19 @@ export default {
     this.getUserList()
   },
   methods: {
+    // 修改资料
+    userinfoDropBtn () {
+      this.$router.push('/info')
+    },
+    // 修改头像
+    updateAvatarDropBtn () {
+      this.$router.push('/avatar')
+    },
+    //  重置密码
+    regPwdDropBtn () {
+      this.$router.push('/pwd')
+    },
+    //  退出
     exitBtn () {
       // 清除token
       window.sessionStorage.removeItem('token')
@@ -174,8 +185,7 @@ export default {
   color: #fff;
 }
 .el-dropdown {
-  margin-left: 14px;
-  margin-top: 15px;
+  margin: 15px 14px 0;
 }
 .header-userInfo span {
   font-size: 14px;
@@ -193,5 +203,13 @@ export default {
 }
 .header-userInfo span {
   margin-left: 15px;
+}
+.sele-center {
+  background-color: #373d41;
+  border: none;
+  color: #eee;
+}
+.el-icon-user {
+  margin-right: 8px;
 }
 </style>
