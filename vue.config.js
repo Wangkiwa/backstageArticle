@@ -1,6 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 
-const BASE_URL = process.env.NODE_ENV === 'production' ? '/blog_vue/' : './'
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/blog_vue/' : '/'
 module.exports = defineConfig({
   transpileDependencies: true,
   publicPath: BASE_URL,
